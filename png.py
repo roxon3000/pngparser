@@ -87,13 +87,13 @@ def parseIHDRChunk(ihdr_bytes):
 
     #validate IHDR vavlues are integer
     try:
-        assert type(width) is int
-        assert type(height) is int
-        assert type(bit_depth) is int
-        assert type(colour_type) is int
-        assert type(comp_method) is int
-        assert type(filter_method) is int
-        assert type(interlace_method) is int
+        assert isinstance(width, int)
+        assert isinstance(height, int)
+        assert isinstance(bit_depth, int)
+        assert isinstance(colour_type, int)
+        assert isinstance(comp_method, int)
+        assert isinstance(filter_method, int)
+        assert isinstance(interlace_method, int)
     except AssertionError as exc:
         raise NotValidPngError("Invalid IHDR value")
 
