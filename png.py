@@ -3,7 +3,8 @@ This module provides tools for processing PNG image files, including:
 - Validation of PNG file headers and filenames.
 - Parsing of PNG chunk headers (e.g., IHDR, IDAT, and IEND chunks).
 - CRC checksum verification for data integrity.
-- Inserting custom text chunks into PNG files for testing or educational purposes.
+- Inserting custom text chunks into PNG files for 
+  testing or educational purposes.
 
 Exceptions:
     - NotValidPngError: Raised when the input file is not a valid PNG file.
@@ -11,8 +12,11 @@ Exceptions:
     - CrcChecksumError: Raised when the CRC checksum verification fails.
 
 Usage:
-    Run this script and input a PNG filename when prompted.
-    Example: python png_processor.py
+    Run this script and input a PNG filename when prompted. png.py is a png 
+    image file decomposer and reverse engineering tool, written solely as a
+    side project by Roxon3000.  Script is also capable of inserting text 
+    chunks into PNG files for educational/testing purposes.
+    Example: python png.py
 
 Author:
     Roxon3000
@@ -54,11 +58,6 @@ class CrcChecksumError(Exception):
     strrc += super().__str__()
     return strrc
 
-
-##
-#   png.py is a png image file decomposer and reverse engineering tool, written solely as a side project by Roxon3000.  Script is also
-#       capable of inserting text chunks into PNG files for educational/testing purposes.
-##
 #input args defaulted for convenience
 message = 'insert message here'
 write_flag = False
@@ -71,7 +70,8 @@ def validate_file_name(fn):
   #check for string type, even tho user input is string by default
   if not isinstance(fn, str):
     raise InvalidFileName('File name must be a string')
-  #check to make sure filename is not empty even tho it will default to input.png
+  #check to make sure filename is not empty even tho it will
+  # default to input.png
   if not fn or len(fn) < 1:
     raise InvalidFileName('File name must not be empty')
 
