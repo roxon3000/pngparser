@@ -14,6 +14,6 @@ jobs:
       - name: Install dependencies
         run: pip install pylint yapf
       - name: Run pylint
-        run: pylint your_project_name/
+        run: pylint pngparser/
       - name: Check formatting with yapf
-        run: yapf --diff --recursive your_project_name/
+        run: yapf --diff --recursive pngparser/
