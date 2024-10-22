@@ -124,7 +124,7 @@ validateFileName(fileName)
 
 
 with open(fileName, mode='rb+') as fs:
-    
+
     try:
         headerBytes = fs.read(8)
         validatePng(headerBytes)
