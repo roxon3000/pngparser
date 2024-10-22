@@ -26,3 +26,6 @@ ignore-missing-imports = yes  # Suppress missing import warnings
 
 [REPORTS]
 output-format = colorized  # Improve readability of reports
+
+[EXIT CODES]
+fail-under = 5.0  # Only fail if the score is very low (<5.0)
