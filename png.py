@@ -1,42 +1,51 @@
 import zlib
 from zlib import crc32
 
+
 class NotValidPngError(Exception):
+
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
 
     def __str__(self) -> str:
-        strrc = "Input file is not a valid PNG File, " 
-        strrc +=  super().__str__()
+        strrc = "Input file is not a valid PNG File, "
+        strrc += super().__str__()
         return strrc
+
 
 class InvalidFileName(Exception):
+
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
 
     def __str__(self) -> str:
-        strrc = "Input filename is not valid, " 
-        strrc +=  super().__str__()
+        strrc = "Input filename is not valid, "
+        strrc += super().__str__()
         return strrc
+
 
 class CrcChecksumError(Exception):
+
     def __init__(self, *args: object) -> None:
         super().__init__(*args)
 
     def __str__(self) -> str:
-        strrc = "CRC checksum failed, " 
-        strrc +=  super().__str__()
+        strrc = "CRC checksum failed, "
+        strrc += super().__str__()
         return strrc
-## 
-#   png.py is a png image file decomposer and reverse engineering tool, written solely as a side project by Roxon3000.  Script is also 
+
+
+##
+#   png.py is a png image file decomposer and reverse engineering tool, written solely as a side project by Roxon3000.  Script is also
 #       capable of inserting text chunks into PNG files for educational/testing purposes.
 ##
-#input args defaulted for convenience 
+#input args defaulted for convenience
 message = "insert message here"
 write_flag = False
 fail_on_crc = True
 
 idat_flag = False
+
 
 def validateFileName(fn):
     #check for string type, even tho user input is string by default
@@ -45,7 +54,6 @@ def validateFileName(fn):
     #check to make sure filename is not empty even tho it will default to input.png
     if not fn or len(fn) < 1:
         raise InvalidFileName("File name must not be empty")
-    
 
 
 def validatePng(headerBytes):
@@ -60,10 +68,13 @@ def validatePng(headerBytes):
         assert headerBytes[6] == 26
         assert headerBytes[7] == 10
     except AssertionError as exc:
-        raise NotValidPngError("Invalid PNG Header: must be 137 80 78 71 13 10 26 10")
+        raise NotValidPngError(
+            "Invalid PNG Header: must be 137 80 78 71 13 10 26 10")
+
 
 def getUnsignedBigInt(bytes):
     return int.from_bytes(bytes, byteorder="big", signed=False)
+
 
 def parseIHDRChunk(ihdr_bytes):
     width = getUnsignedBigInt(ihdr_bytes[:4])
@@ -85,14 +96,24 @@ def parseIHDRChunk(ihdr_bytes):
         assert type(interlace_method) is int
     except AssertionError as exc:
         raise NotValidPngError("Invalid IHDR value")
-    
-    return {'width': width, 'height': height, 'bit_depth':bit_depth, 'colour_type':colour_type, 'comp_method':comp_method, 'filter_method':filter_method, 'interlace_method':interlace_method}
+
+    return {
+        'width': width,
+        'height': height,
+        'bit_depth': bit_depth,
+        'colour_type': colour_type,
+        'comp_method': comp_method,
+        'filter_method': filter_method,
+        'interlace_method': interlace_method
+    }
+
 
 def parseChunkType(chunk_header):
     chunklen = getUnsignedBigInt(chunk_header[:4])
     chunktype = chunk_header[4:].decode('ascii')
 
     return chunklen, chunktype
+
 
 #start program
 
@@ -107,7 +128,6 @@ except BaseException as ex:
     print(ex)
     exit(1)
 
-
 try:
     headerBytes = fs.read(8)
     validatePng(headerBytes)
@@ -115,12 +135,12 @@ try:
     #IHDR CHUNK (image header)
     chunklen, chunktype = parseChunkType(fs.read(8))
     chk = fs.tell()
-    fs.seek(chk-4)
+    fs.seek(chk - 4)
     chunk_bytes = fs.read(chunklen + 4)
     ihdr = parseIHDRChunk(chunk_bytes[4:])
     print('ihdr', ihdr)
     ihdr_crc_bytes = fs.read(4)
-    ihdr_crc = hex(getUnsignedBigInt(ihdr_crc_bytes)) 
+    ihdr_crc = hex(getUnsignedBigInt(ihdr_crc_bytes))
     calc_crc = hex(crc32(chunk_bytes))
     assert ihdr_crc == calc_crc
 
@@ -142,10 +162,13 @@ try:
             ob_keyword = b'mykey'
             ob = ob_keyword + ob_null + bytearray(str.encode(message))
             ob_length = bytearray(len(ob).to_bytes(4, byteorder='big'))
-            ob_crc = int.to_bytes(crc32(ob_type + ob), length=4, byteorder='big', signed=False)
+            ob_crc = int.to_bytes(crc32(ob_type + ob),
+                                  length=4,
+                                  byteorder='big',
+                                  signed=False)
             sob = ob_length + ob_type + ob + ob_crc
             outchunk = sob + iend + iend_crc
-            
+
             tell = fs.tell() - 12
             fs.seek(tell)
             fs.write(outchunk)
@@ -153,7 +176,7 @@ try:
             write_flag = False
             xb = fs.read(8)
             continue
-        
+
         xb_chunk = fs.read(xb_len)
 
         if xb_type == 'IDAT':
@@ -179,7 +202,7 @@ try:
                 raise CrcChecksumError(chunktype)
             else:
                 print('xb_crc', xb_crc, 'does not equal calc_crc', calc_crc)
-        
+
         xb = fs.read(8)
 except BaseException as e:
     print(e)
@@ -188,4 +211,3 @@ else:
 finally:
     #always close the file
     fs.close()
-
