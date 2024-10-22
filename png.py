@@ -1,3 +1,23 @@
+"""
+This module provides tools for processing PNG image files, including:
+- Validation of PNG file headers and filenames.
+- Parsing of PNG chunk headers (e.g., IHDR, IDAT, and IEND chunks).
+- CRC checksum verification for data integrity.
+- Inserting custom text chunks into PNG files for testing or educational purposes.
+
+Exceptions:
+    - NotValidPngError: Raised when the input file is not a valid PNG file.
+    - InvalidFileName: Raised when the input filename is invalid.
+    - CrcChecksumError: Raised when the CRC checksum verification fails.
+
+Usage:
+    Run this script and input a PNG filename when prompted.
+    Example: python png_processor.py
+
+Author:
+    Roxon3000
+"""
+
 import zlib
 from zlib import crc32
 
@@ -73,6 +93,15 @@ def validate_png(header_bytes_in):
 
 
 def get_unsigned_bigint(bytes_in):
+  """
+  Convert a byte sequence into an unsigned big-endian integer.
+
+  Args:
+  bytes_in (bytes): The byte sequence to convert.
+
+  Returns:
+  int: The unsigned integer value.
+  """
   return int.from_bytes(bytes_in, byteorder='big', signed=False)
 
 
