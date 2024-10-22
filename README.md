@@ -1,53 +1,6 @@
 # pngparser
 
+Simple python program that parses a .png image file and provide a mechanism to update meta data.
 
 
-## Pylint report 1
-PS C:\Users\jgood\iCloudDrive\code\python\pngparser-related\pngparser> pylint ./png.py
-************* Module C:\Users\jgood\iCloudDrive\code\python\pngparser-related\pngparser\.pylintrc
-.pylintrc:1:0: E0015: Unrecognized option found: known-local-folder, import-order-style, ignore-missing-imports (unrecognized-option)
-************* Module png
-png.py:9:54: C0303: Trailing whitespace (trailing-whitespace)
-png.py:18:47: C0303: Trailing whitespace (trailing-whitespace)
-png.py:27:39: C0303: Trailing whitespace (trailing-whitespace)
-png.py:30:2: C0303: Trailing whitespace (trailing-whitespace)
-png.py:31:134: C0303: Trailing whitespace (trailing-whitespace)
-png.py:31:0: C0301: Line too long (134/80) (line-too-long)
-png.py:32:0: C0301: Line too long (89/80) (line-too-long)
-png.py:34:37: C0303: Trailing whitespace (trailing-whitespace)
-png.py:45:0: C0301: Line too long (83/80) (line-too-long)
-png.py:48:0: C0303: Trailing whitespace (trailing-whitespace)
-png.py:63:0: C0301: Line too long (86/80) (line-too-long)
-png.py:88:0: C0303: Trailing whitespace (trailing-whitespace)
-png.py:89:0: C0301: Line too long (190/80) (line-too-long)
-png.py:123:53: C0303: Trailing whitespace (trailing-whitespace)
-png.py:145:0: C0301: Line too long (95/80) (line-too-long)
-png.py:148:0: C0303: Trailing whitespace (trailing-whitespace)
-png.py:156:0: C0303: Trailing whitespace (trailing-whitespace)
-png.py:182:0: C0303: Trailing whitespace (trailing-whitespace)
-png.py:191:0: C0305: Trailing newlines (trailing-newlines)
-png.py:4:0: C0115: Missing class docstring (missing-class-docstring)
-png.py:13:0: C0115: Missing class docstring (missing-class-docstring)
-png.py:22:0: C0115: Missing class docstring (missing-class-docstring)
-png.py:43:11: C0123: Use isinstance() rather than type() for a typecheck. (unidiomatic-typecheck)
-png.py:51:16: W0621: Redefining name 'headerBytes' from outer scope (line 112) (redefined-outer-name)
-png.py:63:8: W0707: Consider explicitly re-raising using 'raise NotValidPngError('Invalid PNG Header: must be 137 80 78 71 13 10 26 10') from exc' (raise-missing-from)
-png.py:62:4: W0612: Unused variable 'exc' (unused-variable)
-png.py:65:22: W0622: Redefining built-in 'bytes' (redefined-builtin)
-png.py:79:15: C0123: Use isinstance() rather than type() for a typecheck. (unidiomatic-typecheck)
-png.py:80:15: C0123: Use isinstance() rather than type() for a typecheck. (unidiomatic-typecheck)
-png.py:81:15: C0123: Use isinstance() rather than type() for a typecheck. (unidiomatic-typecheck)
-png.py:82:15: C0123: Use isinstance() rather than type() for a typecheck. (unidiomatic-typecheck)
-png.py:83:15: C0123: Use isinstance() rather than type() for a typecheck. (unidiomatic-typecheck)
-png.py:84:15: C0123: Use isinstance() rather than type() for a typecheck. (unidiomatic-typecheck)
-png.py:85:15: C0123: Use isinstance() rather than type() for a typecheck. (unidiomatic-typecheck)
-png.py:87:8: W0707: Consider explicitly re-raising using 'raise NotValidPngError('Invalid IHDR value') from exc' (raise-missing-from)
-png.py:86:4: W0612: Unused variable 'exc' (unused-variable)
-png.py:92:4: W0621: Redefining name 'chunklen' from outer scope (line 116) (redefined-outer-name)
-png.py:93:4: W0621: Redefining name 'chunktype' from outer scope (line 116) (redefined-outer-name)
-png.py:106:7: W0718: Catching too general exception BaseException (broad-exception-caught)
-png.py:108:4: R1722: Consider using 'sys.exit' instead (consider-using-sys-exit)
-png.py:184:7: W0718: Catching too general exception BaseException (broad-exception-caught)
-png.py:160:15: C0121: Comparison 'idat_flag == False' should be 'idat_flag is False' if checking for the singleton value False, or 'not idat_flag' if testing for falsiness (singleton-comparison)
-png.py:178:12: R1720: Unnecessary "else" after "raise", remove the "else" and de-indent the code inside it (no-else-raise)
-png.py:105:9: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+
