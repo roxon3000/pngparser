@@ -17,4 +17,4 @@ jobs:
         run: pylint ./png.py
       - name: Auto-fix formatting (Optional)
         if: github.event_name == 'push'
-        run: yapf ./png.py --in-place --recursive .        
+        run: yapf ./png.py --in-place     

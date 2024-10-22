@@ -1,6 +1,7 @@
 import zlib
 from zlib import crc32
 
+
 class NotValidPngError(Exception):
 
     def __init__(self, *args: object) -> None:
@@ -122,7 +123,6 @@ fs = None
 
 validateFileName(fileName)
 
-
 with open(fileName, mode='rb+') as fs:
 
     try:
@@ -160,9 +160,9 @@ with open(fileName, mode='rb+') as fs:
                 ob = ob_keyword + ob_null + bytearray(str.encode(message))
                 ob_length = bytearray(len(ob).to_bytes(4, byteorder='big'))
                 ob_crc = int.to_bytes(crc32(ob_type + ob),
-                                    length=4,
-                                    byteorder='big',
-                                    signed=False)
+                                      length=4,
+                                      byteorder='big',
+                                      signed=False)
                 sob = ob_length + ob_type + ob + ob_crc
                 outchunk = sob + iend + iend_crc
 
