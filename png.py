@@ -56,17 +56,17 @@ def validateFileName(fn):
         raise InvalidFileName("File name must not be empty")
 
 
-def validatePng(headerBytes):
+def validatePng(headerBytes_in):
     #137 80 78 71 13 10 26 10
     try:
-        assert headerBytes[0] == 137
-        assert headerBytes[1] == 80
-        assert headerBytes[2] == 78
-        assert headerBytes[3] == 71
-        assert headerBytes[4] == 13
-        assert headerBytes[5] == 10
-        assert headerBytes[6] == 26
-        assert headerBytes[7] == 10
+        assert headerBytes_in[0] == 137
+        assert headerBytes_in[1] == 80
+        assert headerBytes_in[2] == 78
+        assert headerBytes_in[3] == 71
+        assert headerBytes_in[4] == 13
+        assert headerBytes_in[5] == 10
+        assert headerBytes_in[6] == 26
+        assert headerBytes_in[7] == 10
     except AssertionError as exc:
         raise NotValidPngError(
             "Invalid PNG Header: must be 137 80 78 71 13 10 26 10")
