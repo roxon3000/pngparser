@@ -1,0 +1,28 @@
+[MASTER]
+ignore=venv,env,__pycache__,build,dist  # Ignore unnecessary folders
+
+[MESSAGES CONTROL]
+disable=
+    C0114,  # Missing module docstring
+    C0116,  # Missing function or method docstring
+    R0903,  # Too few public methods (for data classes)
+    C0103,  # Variable name doesn't conform to snake_case naming style
+
+[FORMAT]
+max-line-length = 80  # Google recommends 80 chars per line
+indent-string = '    '  # 4 spaces for indentation
+
+[DESIGN]
+max-args = 5  # Google prefers no more than 5 function arguments
+
+[IMPORTS]
+known-standard-library = os,sys  # Customize with your imports
+known-third-party = requests,flask  # Add third-party packages
+known-local-folder = your_project_name  # Replace with your project name
+import-order-style = google  # Enforce Google’s import style
+
+[TYPECHECK]
+ignore-missing-imports = yes  # Suppress missing import warnings
+
+[REPORTS]
+output-format = colorized  # Improve readability of reports
